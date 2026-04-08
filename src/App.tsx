@@ -5,21 +5,14 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { 
-  DraftingCompass, 
   Mail, 
-  Download, 
   ArrowRight, 
-  Settings, 
   Code, 
-  Terminal, 
   Shapes, 
   Cpu, 
   BarChart3, 
-  ExternalLink, 
   AtSign, 
   MapPin, 
-  Github, 
-  Linkedin, 
   Instagram, 
   Menu, 
   X,
@@ -29,16 +22,6 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 
 // --- Types ---
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  tools: string[];
-  image: string;
-  link?: string;
-}
-
 interface Skill {
   category: string;
   icon: any;
@@ -46,51 +29,11 @@ interface Skill {
 }
 
 // --- Constants ---
-const PROJECTS: Project[] = [
-  {
-    id: 1,
-    title: "Learnova(An AI Chatbot)",
-    description: "An AI Chatbot which is built throgh vibecoding tool(Lovable).",
-    category: "Software",
-    tools: ["Lovable", "Antigravity"],
-    image: "https://married-salmon-wnok1wgq2c.edgeone.app/Screenshot%20from%202026-02-21%2017-57-38.png",
-    link: "https://learnova-idt-3.lovable.app/"
-  },
-  {
-    id: 2,
-    title: "TACTO",
-    description: "A Tic Tac Toe Game Built Through VibeCoding.",
-    category: "Software",
-    tools: ["Antigrvity", "Versel", "Python"],
-    image: "https://genetic-red-kgy5kmemel.edgeone.app/Screenshot%20from%202026-02-21%2018-01-23.png",
-    link: "https://tactoo.netlify.app/"
-  },
-  {
-    id: 3,
-    title: "Dr.Content",
-    description: "Strategy provider for Influencer as per there topic and Platform.",
-    category: "Robotics",
-    tools: ["Antigravity","Gemini API","Versel"],
-    image: "https://historic-tomato-9pjzzc52rd.edgeone.app/Screenshot%20from%202026-02-21%2018-44-11.png",
-    link: "https://drcontent.vercel.app/"
-  }
-];
-
 const SKILLS: Skill[] = [
-  {
-    category: "Coding",
-    icon: Terminal,
-    items: ["Python (NumPy)", "C++ & C" , , "HTML and CSS"]
-  },
   {
     category: "Known Languages",
     icon: Shapes,
-    items: ["English", "Kannada", "Hindi", "Konkani"]
-  },
-  {
-    category: "Vibe Coding Tools ",
-    icon: Cpu,
-    items: ["Antigravity", "Cursor", "Replt", "Vesel"]
+    items: ["English", "Kannada", "Hindi", "Telugu"]
   },
   {
     category: "Hobbies",
@@ -100,7 +43,7 @@ const SKILLS: Skill[] = [
 ];
 
 const PARTNERS = [
-  "ALVA'S INSTITUTE OF ENGINEERING AND TECHNOLOGY,MANGLORE (AIML)"
+  "ALVA'S INSTITUTE OF ENGINEERING AND TECHNOLOGY,MANGLORE (ECE)"
 ];
 
 // --- Components ---
@@ -151,63 +94,6 @@ const SkillCard = ({ skill, index }: { skill: Skill, index: number, key?: any })
   );
 };
 
-const ProjectCard = ({ project, index }: { project: Project, index: number, key?: any }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 15, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        delay: index * 0.05,
-        type: "spring",
-        stiffness: 80,
-        damping: 15
-      }}
-      className="group relative"
-    >
-      <div className="aspect-[16/10] rounded-3xl overflow-hidden bg-slate-900 border border-white/5 mb-8 relative">
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-transparent to-transparent opacity-60" />
-        
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-primary/20 backdrop-blur-sm">
-          <motion.a 
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-bg-dark px-8 py-3 rounded-full font-bold shadow-2xl"
-          >
-            View Project
-          </motion.a>
-        </div>
-      </div>
-      
-      <div className="flex items-center gap-3 mb-4">
-        <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/20">
-          {project.category}
-        </span>
-        {project.tools.slice(0, 2).map(tool => (
-          <span key={tool} className="px-3 py-1 rounded-full bg-white/5 text-slate-400 text-[10px] font-bold uppercase tracking-widest border border-white/10">
-            {tool}
-          </span>
-        ))}
-      </div>
-      
-      <h3 className="text-2xl font-display font-bold mb-3 text-white group-hover:text-primary transition-colors">
-        {project.title}
-      </h3>
-      <p className="text-slate-400 leading-relaxed text-sm line-clamp-2">
-        {project.description}
-      </p>
-    </motion.div>
-  );
-};
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -226,7 +112,7 @@ export default function App() {
     setIsSubmitting(true);
     
     const whatsappMessage = `*New Portfolio Message*%0A%0A*Name:* ${formState.name}%0A*Email:* ${formState.email}%0A*Subject:* ${formState.subject}%0A%0A*Message:* ${formState.message}`;
-    const whatsappUrl = `https://wa.me/919380271907?text=${whatsappMessage}`;
+    const whatsappUrl = `https://wa.me/916363264183?text=${whatsappMessage}`;
     
     // Open WhatsApp in a new tab
     window.open(whatsappUrl, '_blank');
@@ -266,8 +152,8 @@ export default function App() {
             <div className="size-12 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl shadow-primary/20 bg-primary/10 p-0.5">
               <div className="w-full h-full rounded-[14px] overflow-hidden">
                 <img 
-                  src="https://damp-tomato-t29wpfuqyy.edgeone.app/omkarsnaik.jpeg" 
-                  alt="Omkar Naik App Logo" 
+                  src="https://cdn.phototourl.com/free/2026-04-07-06b128cd-0070-4c72-af30-55de84194a08.jpg" 
+                  alt="Preetham Shivanand T App Logo" 
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                   referrerPolicy="no-referrer"
                 />
@@ -275,14 +161,14 @@ export default function App() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-display font-bold tracking-tight text-white leading-none">
-                OMKAR<span className="text-primary">NAIK</span>
+                PREETHAM<span className="text-primary">SHIVANAND T</span>
               </span>
               <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-1">Portfolio </span>
             </div>
           </motion.div>
 
           <div className="hidden md:flex items-center gap-10">
-            {['About', 'Skills', 'Projects', 'Experience'].map((item, i) => (
+            {['About', 'Skills', 'Experience'].map((item, i) => (
               <motion.a 
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -327,7 +213,7 @@ export default function App() {
             className="fixed inset-0 z-40 bg-bg-dark pt-24 px-6 md:hidden"
           >
             <div className="flex flex-col gap-8">
-              {['About', 'Skills', 'Projects', 'Experience'].map((item) => (
+              {['About', 'Skills', 'Experience'].map((item) => (
                 <a 
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -369,24 +255,24 @@ export default function App() {
               </div>
               
               <h1 className="text-6xl lg:text-8xl font-display font-bold leading-[1.05] tracking-tight text-white">
-                Hi, I'm Omkar, an <span className="text-primary">AI & ML Student</span> & Problem Solver.
+                Hi, I'm Preetham, an <span className="text-primary">ECE Student</span> & Problem Solver.
               </h1>
               
               <p className="text-xl text-slate-400 max-w-xl leading-relaxed font-light">
-                First-year Artificial Intelligence & Machine Learning student at Mangalore.<br />
-                Passionate about exploring data, algorithms, and intelligent systems.<br />
-                Curious learner focused on building strong foundations in AI and problem-solving.<br />
+                First-year Electronics & Communication student at Mangalore.<br />
+                Passionate about exploring circuits, signals, and communication systems.<br />
+                Curious learner focused on building strong foundations in ECE and problem-solving.<br />
                 Driven to grow my skills and contribute to innovative tech solutions.
               </p>
               
               <div className="flex flex-wrap gap-6 pt-4">
                 <motion.a 
-                  href="#projects"
+                  href="#contact"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="bg-primary hover:bg-primary/90 text-white px-10 py-5 rounded-2xl font-bold transition-all flex items-center gap-3 shadow-2xl shadow-primary/30"
                 >
-                  View My Projects
+                  Contact Me
                   <ArrowRight size={20} />
                 </motion.a>
               </div>
@@ -400,8 +286,8 @@ export default function App() {
             >
               <div className="aspect-square rounded-[3rem] overflow-hidden bg-card-dark border border-white/10 shadow-2xl relative group">
                 <img 
-                  src="https://damp-tomato-t29wpfuqyy.edgeone.app/omkarsnaik.jpeg" 
-                  alt="Omkar Naik Portrait"
+                  src="https://cdn.phototourl.com/free/2026-04-07-06b128cd-0070-4c72-af30-55de84194a08.jpg" 
+                  alt="Preetham Shivanand T Portrait"
                   className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
                   referrerPolicy="no-referrer"
                 />
@@ -443,8 +329,8 @@ export default function App() {
                       <Cpu size={24} />
                     </div>
                     <div>
-                      <h4 className="font-display font-bold text-lg text-white mb-2">Machine Learning</h4>
-                      <p className="text-sm text-slate-400 leading-relaxed">field of AI that enables systems to learn from data and improve their performance without being explicitly programmed.</p>
+                      <h4 className="font-display font-bold text-lg text-white mb-2">Electronics</h4>
+                      <p className="text-sm text-slate-400 leading-relaxed">Designed and analyzed electronic circuits to improve system performance and reliability.</p>
                     </div>
                   </div>
                   <div className="p-6 rounded-2xl bg-card-dark border border-white/5 flex items-start gap-6 group hover:border-primary/30 transition-all">
@@ -452,8 +338,8 @@ export default function App() {
                       <Code size={24} />
                     </div>
                     <div>
-                      <h4 className="font-display font-bold text-lg text-white mb-2">Artificial Intelligence</h4>
-                      <p className="text-sm text-slate-400 leading-relaxed">focused on building systems that can think, learn, and make decisions like humans.</p>
+                      <h4 className="font-display font-bold text-lg text-white mb-2">Communication system</h4>
+                      <p className="text-sm text-slate-400 leading-relaxed">Developed and optimized communication systems for efficient and accurate signal transmission..</p>
                     </div>
                   </div>
                 </div>
@@ -467,22 +353,22 @@ export default function App() {
                 className="text-lg text-slate-400 space-y-8 leading-relaxed font-light"
               >
                 <p>
-                  I am a first-year student at the <strong className="text-white font-medium">Alva's Institute of Engineering and Technology</strong>, where I balance rigorous theoretical studies with practical AI implementation. My approach to technology is rooted in the belief that the most elegant solutions are born from data-driven insights.
+                  I am a first-year student at the <strong className="text-white font-medium">Alva's Institute of Engineering and Technology</strong>, where I balance rigorous theoretical studies with practical electronics implementation. My approach to technology is rooted in the belief that the most elegant solutions are born from data-driven insights.
                 </p>
                 <p>
-                   My technical interests lie in generative models, specifically looking at how transformers can optimize resource allocation in distributed computing environments.
+                   My technical interests lie in embedded systems, specifically looking at how microcontrollers can optimize power consumption in integrated circuits.
                 </p>
                 
                 <div className="grid grid-cols-2 gap-12 pt-10 border-t border-white/5">
                   <div>
                     <h5 className="text-primary font-bold uppercase text-xs mb-3 tracking-widest">Education</h5>
-                    <p className="text-white font-display font-bold">B.Tech Artificial Intelligence</p>
+                    <p className="text-white font-display font-bold">B.Tech Electronics and communication</p>
                     <p className="text-sm text-slate-500">Minor in Mathematics</p>
                   </div>
                   <div>
                     <h5 className="text-primary font-bold uppercase text-xs mb-3 tracking-widest">Research</h5>
-                    <p className="text-white font-display font-bold">Computer Vision</p>
-                    <p className="text-sm text-slate-500">Transformer Architectures</p>
+                    <p className="text-white font-display font-bold">VLSI Design</p>
+                    <p className="text-sm text-slate-500">Digital Signal Processing</p>
                   </div>
                 </div>
               </motion.div>
@@ -505,31 +391,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* Projects Section */}
-        <section className="py-32 px-6" id="projects">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
-              <div className="space-y-4">
-                <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">My Projects</h2>
-                <p className="text-slate-500">Workinng to be more precise in projects.</p>
-              </div>
-              <motion.button 
-                whileHover={{ x: 5 }}
-                className="text-primary font-bold hover:text-primary/80 flex items-center gap-2 transition-all group"
-              >
-                View All Archives 
-                <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {PROJECTS.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Experience Section */}
         <section className="py-32 px-6 bg-white/[0.01] border-y border-white/5" id="experience">
           <div className="max-w-3xl mx-auto">
@@ -544,10 +405,10 @@ export default function App() {
               >
                 <div className="absolute -left-[45px] top-1 size-2.5 rounded-full bg-primary ring-4 ring-primary/20" />
                 <div className="mb-2 text-primary text-xs font-bold uppercase tracking-[0.2em]">2025-2029 (Precent)</div>
-                <h3 className="text-2xl font-display font-bold text-white mb-1">B.E in Artificial Intelligence and Machine Learning</h3>
+                <h3 className="text-2xl font-display font-bold text-white mb-1">B.E in Electronic and Communication</h3>
                 <div className="text-slate-400 font-medium mb-6">A.I.E.T,Manglore</div>
                 <p className="text-slate-500 text-sm leading-relaxed">
-                  Currently pursuing a B.E. in Artificial Intelligence & Machine Learning (First Year), building a strong foundation in intelligent systems and emerging technologies.
+                  Currently pursuing a B.E. in Electronic & Communication (First Year), building a strong foundation in intelligent systems and emerging technologies.Scored a cgpa of 8.5
                 </p>
               </motion.div>
 
@@ -558,11 +419,11 @@ export default function App() {
                 className="relative"
               >
                 <div className="absolute -left-[45px] top-1 size-2.5 rounded-full bg-white/20" />
-                <div className="mb-2 text-primary text-xs font-bold uppercase tracking-[0.2em]">2024</div>
+                <div className="mb-2 text-primary text-xs font-bold uppercase tracking-[0.2em]">2025</div>
                 <h3 className="text-2xl font-display font-bold text-white mb-1">Pre University</h3>
-                <div className="text-slate-400 font-medium mb-6">Himalaya P.U College,Ankola</div>
+                <div className="text-slate-400 font-medium mb-6">Sri Chaitanya P.U College Ballari</div>
                 <p className="text-slate-500 text-sm leading-relaxed">
-                  Secured 90% in PCMB during Pre-University, reflecting a strong foundation in Physics, Chemistry, Mathematics, and Biology.
+                  Secured 89% in PCMB during Pre-University, reflecting a strong foundation in Physics, Chemistry, Mathematics, and Biology.
                 </p>
               </motion.div>
 
@@ -573,11 +434,11 @@ export default function App() {
                 className="relative"
               >
                 <div className="absolute -left-[45px] top-1 size-2.5 rounded-full bg-white/20" />
-                <div className="mb-2 text-primary text-xs font-bold uppercase tracking-[0.2em]">2022</div>
+                <div className="mb-2 text-primary text-xs font-bold uppercase tracking-[0.2em]">2023</div>
                 <h3 className="text-2xl font-display font-bold text-white mb-1">Matriculation</h3>
-                <div className="text-slate-400 font-medium mb-6">P.M.E.H.S, Ankola</div>
+                <div className="text-slate-400 font-medium mb-6">Deepika Higher Primary School, Molkalmuru</div>
                 <p className="text-slate-500 text-sm leading-relaxed">
-                  Achieved an outstanding 97.76% in matriculation, demonstrating strong academic excellence and consistent dedication.
+                  Achieved an outstanding 79% in matriculation, demonstrating strong academic excellence and consistent dedication.
                 </p>
               </motion.div>
             </div>
@@ -603,7 +464,7 @@ export default function App() {
                     <div className="size-12 rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                       <AtSign size={20} />
                     </div>
-                    <span className="text-lg font-medium">omkarsnaik999@gmail.com</span>
+                    <span className="text-lg font-medium">preethamshivanand8@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-6 group cursor-pointer">
                     <div className="size-12 rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
@@ -616,9 +477,8 @@ export default function App() {
 
               <div className="flex gap-6 mt-16 relative z-10">
                 {[
-                  { Icon: Linkedin, href: "https://www.linkedin.com/in/omkar-naik-31651735b/" },
-                  { Icon: Github, href: "https://github.com/omkar895" },
-                  { Icon: Instagram, href: "https://www.instagram.com/0mkar.exe_/" }
+                 
+                  { Icon: Instagram, href: "https://www.instagram.com/preetham_shivanand_/" }
                 ].map((social, i) => (
                   <motion.a 
                     key={i}
@@ -744,15 +604,15 @@ export default function App() {
           <div className="flex items-center gap-4">
             <div className="size-10 rounded-xl overflow-hidden border border-white/10 shadow-lg">
               <img 
-                src="https://damp-tomato-t29wpfuqyy.edgeone.app/omkarsnaik.jpeg" 
-                alt="Omkar Naik Logo" 
+                src="https://cdn.phototourl.com/free/2026-04-07-06b128cd-0070-4c72-af30-55de84194a08.jpg" 
+                alt="Preetham Shivanand T Logo" 
                 className="w-full h-full object-cover grayscale"
                 referrerPolicy="no-referrer"
               />
             </div>
           <div className="flex flex-col items-start">
             <span className="text-lg font-display font-bold tracking-tight text-white leading-none">
-              OMKAR<span className="text-primary">NAIK</span>
+              PREETHAM<span className="text-primary">SHIVANAND T</span>
             </span>
             <span className="text-[8px] font-bold text-slate-600 uppercase tracking-[0.2em] mt-1">© 2026</span>
           </div>
@@ -762,9 +622,7 @@ export default function App() {
           
           <div className="flex gap-10 text-sm font-medium text-slate-400">
             {[
-              { name: 'LinkedIn', href: 'https://www.linkedin.com/in/omkar-naik-31651735b/' },
-              { name: 'GitHub', href: 'https://github.com/omkar895' },
-              { name: 'Instagram', href: 'https://www.instagram.com/0mkar.exe_/' }
+              { name: 'Instagram', href: 'https://www.instagram.com/preetham_shivanand_/' }
             ].map(social => (
               <a 
                 key={social.name} 
